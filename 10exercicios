@@ -1,0 +1,103 @@
+escolha_exercicio = int(input("Qual exercicio quer executar? "))
+
+if escolha_exercicio == 1:
+    n1 = int(input("Digite o primeiro número: "))
+    n2 = int(input("Digite o segundo número: "))
+    n3 = int(input("Digite o terceiro número: "))
+    n4 = int(input("Digite o quarto número: "))
+    n5 = int(input("Digite o último número: "))
+
+    print("A soma dos cinco números é ",{n1+n2+n3+n4+n5})
+
+elif escolha_exercicio == 2:
+    lista = []
+    n1 = int(input('Digite o primeiro número: '))
+    n2 = int(input('Digite o segundo número: '))
+    n3 = int(input('Digite o terceiro número: '))
+    n4 = int(input('Digite o último número: '))
+    lista.append(n1)
+    lista.append(n2)
+    lista.append(n3)
+    lista.append(n4)
+    print(f' O maior é: {max(lista)}, o menor é: {min(lista)}')
+
+elif escolha_exercicio == 3:
+    palavra = input("Digite uma palavra: ")
+    contador = 0
+    for letra in palavra:
+        if letra in "aeiouAEIOU":
+            contador += 1
+    print("A palavra tem", contador, "vogais.")
+
+elif escolha_exercicio == 4:
+    lista = []
+    n1 = int(input('Digite o primeiro número: '))
+    if n1%2 == 0:
+        lista.append(n1)
+    n2 = int(input('Digite o segundo número: '))
+    if n2%2 == 0:
+        lista.append(n2)
+    n3 = int(input('Digite o terceiro número: '))
+    if n3%2 == 0:
+        lista.append(n3)
+    n4 = int(input('Digite o quarto número: '))
+    if n4%2 == 0:
+        lista.append(n4)
+    n5 = int(input('Digite o quinto número: '))
+    if n5%2 == 0:
+        lista.append(n5)
+    n6 = int(input('Digite o último número: '))
+    if n6%2 == 0:
+        lista.append(n6)
+    print(lista)
+
+elif escolha_exercicio == 5:
+    
+    n1 = input(('Digite a primeira nota: '))
+    n2 = input(('Digite a segunda nota: '))
+    n3 = input(('Digite a terceira nota: '))
+    n4 = input(('Digite a último nota: '))
+
+    print(f'A média é {(n1+n2+n3+n4) / 4}')
+
+elif escolha_exercicio == 6:
+    lista = []
+    n1 = input('Digite um número: ')
+    contador = 0
+    while contador < 10:
+        contador = contador + 1
+        lista.append(int(n1) * contador)
+    print(lista)
+
+elif escolha_exercicio == 7:
+    lista = []
+    n1 = input('Digite um número: ')
+    contador = 0
+    while contador < int(n1):
+        contador = contador + 1 
+        lista.append(contador)
+    lista.append(int(n1))
+    print(lista)
+
+elif escolha_exercicio == 8:
+    palavra = input('Digite uma palavra: ')
+    palavra_inv = palavra[::-1]
+    print(palavra_inv)
+
+elif escolha_exercicio == 9:
+    n1 = int(input('Digite um número: '))
+    if n1 % 3 == 0:
+        print("O numero é multiplo de 3")
+    else:
+        print('O número não é múltiplo de 3')
+
+elif escolha_exercicio == 10:
+    lista= []
+    nome1 = input('Digite o primeiro nome: ').capitalize()
+    lista.append(nome1)
+    nome2 = input('Digite o segundo nome: ').capitalize()
+    lista.append(nome2)
+    nome3 = input('Digite o último nome: ').capitalize()
+    lista.append(nome3)
+    lista.sort()
+    print(lista)
