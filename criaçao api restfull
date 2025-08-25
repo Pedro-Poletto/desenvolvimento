@@ -27,7 +27,7 @@ db_alunos: Dict[int, Aluno] = {
 @app.get("/")
 def read_root():
     """Endpoint raiz da API."""
-    return {"message": "Bem vindo a API de Alunos! Acesse /docs para a documentação interativa."}
+    return {"message": "Bem vindo a api. Acesse /docs para a documentação interativa."}
 
 @app.get("/alunos")
 def listar_alunos():
@@ -52,7 +52,7 @@ def criar_aluno(matricula: int, aluno: Aluno):
 
 @app.put("/alunos/{matricula}")
 def atualizar_aluno(matricula: int, aluno: Aluno):
-    """Atualiza os dados de um aluno existente."""
+    """stualiza os dados de aluno existente."""
     if matricula not in db_alunos:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Aluno não encontrado")
     
