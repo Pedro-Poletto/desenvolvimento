@@ -1,0 +1,93 @@
+# 1- idade
+def classificar_Idade(idade):
+    if idade >= 1 and idade <= 11:
+        return 'Criança'
+    elif idade >= 12 and idade <= 17:
+        return 'Adolescente'
+    elif idade >= 18 and idade <= 100:
+        return "Adulto"
+    else:
+        return 'Idade Inválida'
+   
+#2- numero
+def comparar_numeros(n1, n2):
+    if n1 > n2:
+        return(n1)
+    elif n2 > n1:
+        return(n2)
+    else:
+        return("os números são iguais")
+
+#3-vogal
+def verificar_vogal_ou_consoante(letra):
+    if letra == "a" and "e" and "i" and "o" and "u":
+        return ("é uma vogal")
+    else:
+        return("é uma consoante")
+   
+# 4- Comparação de senhas
+def verificar_senha(Senha1, Senha2):
+    if Senha2 == Senha1:
+        return 'Acesso permitido'
+    else:
+        return 'Acesso negado'
+
+#5- Cálculo média
+def Calculo_media(media):
+    if media >= 7:
+        return 'aprovado'
+    else:
+        return 'reprovado'
+   
+#6- 3 tres numeros em ordem decrescente
+def Numeros_decrescente(N1, N2, N3):
+    numeros = [N1, N2, N3]
+    numeros.sort(reverse=True)
+    return(numeros)
+
+#7- QUANTIDADE DE GASOLINA EM UMA VIAGEM
+def calcular_litros(Tempo, Velocidade):
+    Distancia = Tempo * Velocidade
+    litros_usados = Distancia / 12
+    return(litros_usados)
+
+#===============================
+
+import unittest
+from Atividade import *
+
+class TestesExemplos(unittest.TestCase):
+    def testar_classificar_idade(self):
+        self.assertEqual(classificar_Idade(10), 'Criança')
+        self.assertEqual(classificar_Idade(15), 'Adolescente')
+        self.assertEqual(classificar_Idade(34), 'Adulto')
+        self.assertEqual(classificar_Idade(150), 'Idade Inválida')
+
+    def teste_comparar_numeros(self):
+        self.assertEqual(comparar_numeros(20,12), 20)
+        self.assertEqual(comparar_numeros(13,56), 56)
+        self.assertEqual(comparar_numeros(30,30), 'os números são iguais')
+   
+    def teste_verificar_vogal_ou_consoante(self):
+        self.assertEqual(verificar_vogal_ou_consoante('a'), 'é uma vogal')
+        self.assertEqual(verificar_vogal_ou_consoante('p'), 'é uma consoante')
+
+    def teste_verificar_senha(self):
+        self.assertEqual(verificar_senha('ABCD', 'ABCD'), 'Acesso permitido')
+        self.assertEqual(verificar_senha('ABCD','ACFD'), 'Acesso negado')
+
+    def teste_Calculo_media(self):
+        self.assertEqual(Calculo_media(9), 'aprovado')
+        self.assertEqual(Calculo_media(5), 'reprovado')
+
+    def teste_Numeros_decrescente(self):
+        self.assertEqual(Numeros_decrescente(1,2,3), [3,2,1])
+        self.assertEqual(Numeros_decrescente(4,5,6), [6,5,4])
+
+def teste_calcular_litros(self):
+        Distancia = 12 * 24
+        litros_usados = Distancia / 12
+        self.assertEqual(calcular_litros(12,24), litros_usados)
+
+if __name__ == "__main__":
+    unittest.main()
