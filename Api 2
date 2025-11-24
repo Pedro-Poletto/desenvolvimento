@@ -1,0 +1,86 @@
+from fastapi import FastAPI, HTTPException, status
+from pydantic import BaseModel, Field
+from typing import Dict, Optional
+
+# aplicação fastapi
+app = FastAPI(
+    title="API de Tarefas (To-Do List)",
+    description="API para realizar operações CRUD em uma lista de tarefas.",
+    version="1.0.0"
+)
+
+# modelo de dados da tarefa
+class Tarefa(BaseModel):
+    titulo: str = Field(..., min_length=3, description="Título da tarefa (mínimo 3 caracteres)")
+    descricao: Optional[str] = None
+    concluida: bool = False
+
+# banco de dados em memória
+db_tarefas: Dict[int, Tarefa] = {}
+
+# contador simples para gerar IDs automaticamente
+contador_id = 1
+
+
+# endpoints
+
+@app.get("/")
+def read_root():
+    """Endpoint raiz da API."""
+    return {"message": "Bem-vindo à API de Tarefas. Acesse /docs para a documentação interativa."}
+
+
+@app.get("/tarefas")
+def listar_tarefas():
+    """Retorna todas as tarefas cadastradas."""
+    return db_tarefas
+
+
+@app.get("/tarefas/{tarefa_id}")
+def pegar_tarefa(tarefa_id: int):
+    """Retorna uma tarefa específica pelo ID."""
+    if tarefa_id not in db_tarefas:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tarefa não encontrada")
+    return db_tarefas[tarefa_id]
+
+
+@app.post("/tarefas", status_code=status.HTTP_201_CREATED)
+def criar_tarefa(tarefa: Tarefa):
+    """Cria uma nova tarefa com ID gerado automaticamente."""
+    global contador_id
+
+    nova_tarefa_id = contador_id
+    contador_id += 1
+
+    db_tarefas[nova_tarefa_id] = tarefa
+
+    return {
+        "message": "Tarefa criada com sucesso!",
+        "id": nova_tarefa_id,
+        "tarefa": tarefa
+    }
+
+
+@app.put("/tarefas/{tarefa_id}")
+def atualizar_tarefa(tarefa_id: int, tarefa: Tarefa):
+    """Atualiza os dados de uma tarefa existente."""
+    if tarefa_id not in db_tarefas:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tarefa não encontrada")
+
+    db_tarefas[tarefa_id] = tarefa
+
+    return {
+        "message": "Tarefa atualizada com sucesso!",
+        "id": tarefa_id,
+        "tarefa": tarefa
+    }
+
+
+@app.delete("/tarefas/{tarefa_id}", status_code=status.HTTP_204_NO_CONTENT)
+def deletar_tarefa(tarefa_id: int):
+    """Deleta uma tarefa."""
+    if tarefa_id not in db_tarefas:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Tarefa não encontrada")
+
+    del db_tarefas[tarefa_id]
+    return {"message": "Tarefa deletada com sucesso!"}
